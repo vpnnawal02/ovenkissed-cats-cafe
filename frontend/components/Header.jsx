@@ -4,7 +4,7 @@ import Navbar from './Navbar'
 
 const Header = () => {
     return (
-        <div className='min-h-screen mb-4 bg-cover bg-center items-center w-full overflow-hidden justify-center' style={{ backgroundImage: "url('/src/assets/header_bg.jpg')" }} id='header'>
+        <div className='min-h-screen mb-4 bg-cover bg-center items-center w-full overflow-hidden justify-center' style={{ backgroundImage: `url(${header_bg})` }} id='header'>
             <Navbar />
             <div className="flex flex-col justify-center items-center gap-10 h-[80vh] ">
                 <h2 className='text-white text-3xl font-bold text-center w-[80%] mt-30 md:text-6xl md:mt-50 md:w-[60%] '>WHERE HANDCRAFTED COFFEE, GENTLE PURRS, PEACEFUL MOMENTS BLEND PERFECTLY</h2>
