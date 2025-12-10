@@ -1,5 +1,5 @@
 import React from 'react'
-import header_bg from '../src/assets/header_bg.jpg'
+import header_bg from '../assets/header_bg.jpg'
 import Navbar from './Navbar'
 
 const Header = () => {
