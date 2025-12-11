@@ -1,0 +1,9 @@
+{
+    "projects": {
+        "frontend": {
+            "source": "frontend",
+            "buildCommand": "npm install && npm run build",
+            "outputDirectory": "dist"
+        }
+    }
+}
