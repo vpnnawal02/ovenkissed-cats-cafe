@@ -58,7 +58,7 @@ root/
 
 ### Clone the project
 
-git clone https://github.com/your-username/ovenkissed-cats-cafe
+git clone https://github.com/vpnnawal02/ovenkissed-cats-cafe
 cd ovenkissed-cats-cafe/frontend
 
 ## Install dependencies
