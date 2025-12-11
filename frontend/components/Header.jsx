@@ -1,5 +1,6 @@
 import React from 'react'
 import Navbar from './Navbar'
+import header_bg from '../src/assets/header_bg.jpg'
 
 const Header = () => {
     return (
