@@ -9,7 +9,7 @@ from fastapi.responses import RedirectResponse
 app = FastAPI()
 
 origins = [
-    "https://frabjous-elf-35e678.netlify.ap", 
+    "https://frabjous-elf-35e678.netlify.app/", 
 ]
 
 app.add_middleware(
