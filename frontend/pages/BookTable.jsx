@@ -19,7 +19,7 @@ const BookTable = () => {
         e.preventDefault();
 
         try {
-            const res = await fetch("https://ovenkissed-cats-cafe.onrender.com/booktable", {
+            const res = await fetch("https://ovenkissed-cats-cafe.onrender.com", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
