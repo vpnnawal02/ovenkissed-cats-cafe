@@ -8,10 +8,6 @@ from fastapi.responses import RedirectResponse
 
 app = FastAPI()
 
-@app.get("/")
-def go_to_github():
-    return RedirectResponse(url="https://frabjous-elf-35e678.netlify.app/", status_code=307)
-
 origins = [
     " https://frabjous-elf-35e678.netlify.app/", 
 ]
@@ -23,6 +19,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.get("/")
+def go_to_github():
+    return RedirectResponse(url="https://frabjous-elf-35e678.netlify.app/", status_code=307)
 
 class Booking(BaseModel):
     name: str
