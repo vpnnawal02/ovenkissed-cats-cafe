@@ -9,7 +9,7 @@ from fastapi.responses import RedirectResponse
 app = FastAPI()
 
 origins = [
-    " https://frabjous-elf-35e678.netlify.app/", 
+    "https://frabjous-elf-35e678.netlify.app/", 
 ]
 
 app.add_middleware(
@@ -35,8 +35,8 @@ class Booking(BaseModel):
 def send_booking_email(booking: Booking):
     msg = EmailMessage()
     msg["Subject"] = "New Table Booking"
-    msg["From"] = "anms.creator02@gmail.com"
-    msg["To"] = "vn.nawal02@gmail.com"
+    msg["From"] = "SENDER_EMAIL"
+    msg["To"] = "RECEIVER_EMAIL"
 
     html = f"""
     <html>
@@ -85,7 +85,7 @@ def send_booking_email(booking: Booking):
 
     # Example for Gmail SMTP with app password
     with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
-        smtp.login("vn.nawal02@gmail.com", "ezxgtndjewflinya")
+        smtp.login("SENDER_EMAIL", "GMAIL_APP_PASSWORD")
         smtp.send_message(msg)
 
 @app.post("/api/book-table")
