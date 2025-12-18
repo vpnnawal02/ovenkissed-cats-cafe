@@ -5,8 +5,16 @@ from pydantic import BaseModel
 import smtplib
 from email.message import EmailMessage
 from fastapi.responses import RedirectResponse
+import os
+from dotenv import load_dotenv
 
 app = FastAPI()
+
+load_dotenv()  # loads .env into environment
+
+APP_PASSWORD = os.getenv("GMAIL_APP_PASSWORD")
+SENDER_EMAIL = os.getenv("SENDER_EMAIL")
+RECEIVER_EMAIL = os.getenv("RECEIVER_EMAIL")
 
 origins = [
     "https://frabjous-elf-35e678.netlify.app/", 
@@ -35,8 +43,8 @@ class Booking(BaseModel):
 def send_booking_email(booking: Booking):
     msg = EmailMessage()
     msg["Subject"] = "New Table Booking"
-    msg["From"] = "SENDER_EMAIL"
-    msg["To"] = "RECEIVER_EMAIL"
+    msg["From"] = SENDER_EMAIL
+    msg["To"] = RECEIVER_EMAIL
 
     html = f"""
     <html>
