@@ -15,9 +15,28 @@ const BookTable = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        setSubmitted(true);
+
+        try {
+            const res = await fetch("http://localhost:8000/api/book-table", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    ...formData,
+                    guests: Number(formData.guests), // backend expects int
+                }),
+            });
+
+            if (!res.ok) {
+                throw new Error("Failed to submit");
+            }
+
+            setSubmitted(true);
+        } catch (err) {
+            console.error(err);
+            alert("Something went wrong while sending your reservation.");
+        }
     };
 
     return (
