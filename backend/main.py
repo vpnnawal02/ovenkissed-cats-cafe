@@ -17,7 +17,7 @@ SENDER_EMAIL = os.getenv("SENDER_EMAIL")
 RECEIVER_EMAIL = os.getenv("RECEIVER_EMAIL")
 
 origins = [
-    "https://frabjous-elf-35e678.netlify.app/", 
+    "https://frabjous-elf-35e678.netlify.app", 
 ]
 
 app.add_middleware(
@@ -93,10 +93,10 @@ def send_booking_email(booking: Booking):
 
     # Example for Gmail SMTP with app password
     with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
-        smtp.login("SENDER_EMAIL", "GMAIL_APP_PASSWORD")
+        smtp.login(SENDER_EMAIL, APP_PASSWORD)
         smtp.send_message(msg)
 
-@app.post("/book-table")
+@app.post("/booktable")
 async def book_table(booking: Booking):
     print("New booking:", booking)
     send_booking_email(booking)
