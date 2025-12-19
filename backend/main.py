@@ -96,7 +96,7 @@ def send_booking_email(booking: Booking):
         smtp.login("SENDER_EMAIL", "GMAIL_APP_PASSWORD")
         smtp.send_message(msg)
 
-@app.post("/api/book-table")
+@app.post("/book-table")
 async def book_table(booking: Booking):
     print("New booking:", booking)
     send_booking_email(booking)
