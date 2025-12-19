@@ -5,8 +5,8 @@ Inspired by cozy cat cafés, this project focuses on clean design, smooth intera
 ---
 
 ## 🚀 Live Demo  
-🔗 **Website:** https://frabjous-elf-35e678.netlify.app/
-🔗 **Repository:** https://github.com/vpnnawal02/ovenkissed-cats-cafe  
+Full App: https://ovenkissed-cats-cafe.onrender.com (Waiting time)
+Frontend: https://frabjous-elf-35e678.netlify.app (No waiting time)
 
 ---
 
@@ -30,28 +30,35 @@ Inspired by cozy cat cafés, this project focuses on clean design, smooth intera
 - Tailwind CSS / Custom CSS  
 - React Router
 
-### **Deployment**
-- Netlify  
-
 ### **Backend**
-FastAPI(Python)
-(Currently under development)
+- FastAPI
+- Pydantic
+- Python 3.13
+- CORS Middleware
+
+### Deployment
+- **Frontend:** Netlify  
+- **Backend:** Render
 ---
 
-## 📂 Project Structure  
-root/
-└── frontend/
-├── public/
-│ └── _redirects (optional for routing)
-├── src/
-│ ├── components/
-│ ├── pages/
-│ ├── assets/
-│ └── App.jsx
-├── package.json
-├── vite.config.js
-└── README.md
+### Email Service
+- **Resend** (Email API – Render compatible)
 
+## 📂 Project Structure  
+ovenkissed-cats-cafe/
+│
+├── frontend/
+│ ├── src/
+│ ├── public/
+│ ├── index.html
+│ └── package.json
+│
+├── backend/
+│ ├── main.py
+│ ├── requirements.txt
+│ └── .env (not committed)
+│
+└── README.md
 ---
 
 ## 🧩 Installation & Setup
@@ -73,17 +80,28 @@ npm run build
 ## Preview production build
 npm run preview
 
-# 🌐 Deployment (Netlify)
+## Environment variables (.env)
+RESEND_API_KEY=your_resend_api_key
+FROM_EMAIL=Ovenkissed <onboarding@resend.dev>
+TO_EMAIL=your_email@gmail.com
 
-## Use these exact settings:
+## Email Handling (Resend)
+- Email is sent automatically when a booking is submitted
+- Uses Resend Email API (no SMTP, Render-safe)
+- HTML formatted email for admin notification
 
-Setting	            Value
-Base directory	    frontend
-Build command	      npm run build
-Publish directory	  frontend/dist
+### Known Limitations
+- Bookings are not yet stored in a database
+- Email confirmation is sent only to admin (not customer)
+
+### Future Improvements
+- 📦 Database integration (PostgreSQL / MongoDB)
+- 👤 Customer confirmation emails
+- 🛠️ Admin dashboard
+- 🔐 Rate limiting & spam protection
+- 📊 Booking analytics
 
 # 🧑‍💻 Author
-
 Vipin Nawal
 Full-Stack Developer
 📧 vn.nawal02@gmail.com
