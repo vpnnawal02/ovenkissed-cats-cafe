@@ -2,19 +2,18 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-import smtplib
-from email.message import EmailMessage
 from fastapi.responses import RedirectResponse
 import os
 from dotenv import load_dotenv
-
-app = FastAPI()
+import resend
 
 load_dotenv()  # loads .env into environment
 
-APP_PASSWORD = os.getenv("GMAIL_APP_PASSWORD")
-SENDER_EMAIL = os.getenv("SENDER_EMAIL")
-RECEIVER_EMAIL = os.getenv("RECEIVER_EMAIL")
+app = FastAPI()
+
+resend.api_key = os.getenv("RESEND_API_KEY")
+FROM_EMAIL = os.getenv("FROM_EMAIL")
+TO_EMAIL = os.getenv("TO_EMAIL")
 
 origins = [
     "https://frabjous-elf-35e678.netlify.app", 
@@ -28,6 +27,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 @app.get("/")
 def go_to_github():
     return RedirectResponse(url="https://frabjous-elf-35e678.netlify.app/", status_code=307)
@@ -40,12 +40,7 @@ class Booking(BaseModel):
     guests: int
     request: str | None = None
 
-def send_booking_email(booking: Booking):
-    msg = EmailMessage()
-    msg["Subject"] = "New Table Booking"
-    msg["From"] = SENDER_EMAIL
-    msg["To"] = RECEIVER_EMAIL
-
+def send_booking_email(booking:Booking):
     html = f"""
     <html>
       <body style="font-family: Arial, sans-serif; background:#f4f4f4; padding:20px;">
@@ -88,18 +83,20 @@ def send_booking_email(booking: Booking):
     </html>
     """
 
-    msg.set_content("New booking received.")               # plain‑text fallback
-    msg.add_alternative(html, subtype="html")              # HTML version
-
-    # Example for Gmail SMTP with app password
-    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
-        smtp.login(SENDER_EMAIL, APP_PASSWORD)
-        smtp.send_message(msg)
+    resend.Emails.send({
+        "from": FROM_EMAIL,
+        "to": TO_EMAIL,
+        "subject": "New Table Booking – Ovenkissed Cats Cafe",
+        "html": html,
+    })
 
 @app.post("/booktable")
 async def book_table(booking: Booking):
     print("New booking:", booking)
-    send_booking_email(booking)
+
+    try:
+        send_booking_email(booking)
+    except Exception as e:
+        print("Email failed:", e)
+
     return {"status": "ok"}
-
-
