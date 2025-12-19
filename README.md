@@ -5,7 +5,7 @@ Inspired by cozy cat cafés, this project focuses on clean design, smooth intera
 ---
 
 ## 🚀 Live Demo  
-Full App: https://ovenkissed-cats-cafe.onrender.com (Waiting time)
+Full App: https://ovenkissed-cats-cafe.onrender.com (Waiting time) <br>
 Frontend: https://frabjous-elf-35e678.netlify.app (No waiting time)
 
 ---
